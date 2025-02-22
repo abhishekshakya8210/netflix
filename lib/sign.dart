@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/homepage.dart';
 
 class Sign extends StatefulWidget {
   const Sign({super.key});
@@ -89,7 +90,11 @@ class _SignState extends State<Sign> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder:
+                   (context)=>Homepage()));
+                
+                      },
                       child: Text(
                         'Sign in',
                         style: TextStyle(

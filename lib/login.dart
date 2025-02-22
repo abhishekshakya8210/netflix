@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/homepage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -76,7 +77,8 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     onPressed: () {
-                      // Login action
+                  Navigator.push(context, MaterialPageRoute(builder:
+                   (context)=>Homepage()));
                     },
                     child: Text(
                       'Login',

@@ -8,7 +8,6 @@ class Page_3 extends StatefulWidget {
 }
 
 class _Page_3State extends State<Page_3> {
-  // ✅ Corrected list structure
   List<String> images = [
     'assets/z-1.png',
     'assets/z-2.png',
@@ -30,52 +29,56 @@ class _Page_3State extends State<Page_3> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      height: 320,
-      width: double.maxFinite,
+      height: screenHeight * 0.4, // 40% of screen height
+      width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(screenWidth * 0.03),
       ),
       child: ListView.builder(
         itemCount: images.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            height: 320,
-            width: 200,
-            margin: EdgeInsets.all(10),
+            height: screenHeight * 0.4,
+            width: screenWidth * 0.35, // 35% of screen width
+            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
             ),
             child: Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // Smooth corners
+                  borderRadius: BorderRadius.circular(screenWidth * 0.03),
                   child: AspectRatio(
-                    // Adjust the ratio as needed (example: 3 / 4)
-                    aspectRatio: 3 / 4,
+                    aspectRatio: 3 / 4, // Standard movie poster ratio
                     child: Image.asset(
                       images[index],
-                      fit: BoxFit.cover, // Image covers the AspectRatio box without distortion
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(screenWidth * 0.02),
                   child: Container(
-                    height: 40,
-                    width: 40,
-                 decoration: BoxDecoration(
-                     color: Colors.red,
-                     borderRadius: BorderRadius.circular(7)
-                 ),
-                 child: Stack(
-                  children: [
-                  Center(child: Image(image: AssetImage('assets/king.png')))
-                  ],
-                 ),
+                    height: screenHeight * 0.06, // 6% of screen height
+                    width: screenHeight * 0.06,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/king.png',
+                        width: screenHeight * 0.04, // Adjusted based on screen size
+                        height: screenHeight * 0.04,
+                      ),
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           );

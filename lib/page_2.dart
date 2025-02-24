@@ -8,7 +8,6 @@ class Page_2 extends StatefulWidget {
 }
 
 class _Page_2State extends State<Page_2> {
-  // ✅ Corrected list structure
   List<String> images = [
     'assets/b-1.png',
     'assets/b-2.png',
@@ -28,37 +27,35 @@ class _Page_2State extends State<Page_2> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      height: 320,
-      width: double.maxFinite,
+      height: screenHeight * 0.4, // 40% of screen height
+      width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(screenWidth * 0.03), // 3% of screen width
       ),
       child: ListView.builder(
         itemCount: images.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            height: 320,
-            width: 200,
-            margin: EdgeInsets.all(10),
+            height: screenHeight * 0.4,
+            width: screenWidth * 0.35, // 35% of screen width
+            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
             ),
-            child: Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // Smooth corners
-                  child: AspectRatio(
-                    // Adjust the ratio as needed (example: 3 / 4)
-                    aspectRatio: 3 / 4,
-                    child: Image.asset(
-                      images[index],
-                      fit: BoxFit.cover, // Image covers the AspectRatio box without distortion
-                    ),
-                  ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
+              child: AspectRatio(
+                aspectRatio: 3 / 4, // Standard movie poster ratio
+                child: Image.asset(
+                  images[index],
+                  fit: BoxFit.cover,
                 ),
-              ],
+              ),
             ),
           );
         },

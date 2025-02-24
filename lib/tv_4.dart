@@ -8,7 +8,6 @@ class Tv_4 extends StatefulWidget {
 }
 
 class _Tv_4State extends State<Tv_4> {
-  // ✅ Corrected list structure
   List<String> images = [
     'assets/g-1.png',
     'assets/g-2.png',
@@ -21,41 +20,38 @@ class _Tv_4State extends State<Tv_4> {
     'assets/g-9.png',
     'assets/g-10.png',
     'assets/g-11.png',
-   
   ];
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      height: 180,
-      width: double.maxFinite,
+      height: screenHeight * 0.25, // 25% of screen height
+      width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(screenWidth * 0.03),
       ),
       child: ListView.builder(
-        itemCount: images.length, // ✅ Use full list length
+        itemCount: images.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            height: 180,
-            width: 290,
-            margin: EdgeInsets.all(10),
+            height: screenHeight * 0.25,
+            width: screenWidth * 0.7, // 70% of screen width
+            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
             decoration: BoxDecoration(
-              
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
             ),
-            child: Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // ✅ Smooth corners
-                  child: Image.asset(
-                    images[index], // ✅ Correct way to access images
-                    fit: BoxFit.cover,
-                    width: double.infinity, 
-                    height: double.infinity,
-                  ),
-                ),
-              ],
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
+              child: Image.asset(
+                images[index],
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
             ),
           );
         },

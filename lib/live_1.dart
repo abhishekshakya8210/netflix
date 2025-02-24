@@ -9,7 +9,7 @@ class Live_1 extends StatefulWidget {
 
 class _Live_1State extends State<Live_1> {
   // ✅ Corrected list structure
-  List<String> images = [
+  final List<String> images = [
     'assets/a-1.png',
     'assets/a-2.png',
     'assets/a-3.png',
@@ -25,30 +25,31 @@ class _Live_1State extends State<Live_1> {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ Get screen dimensions
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenWidth = screenSize.width;
+    final double screenHeight = screenSize.height;
+
     return Container(
-      height: 180,
-      width: double.maxFinite,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-      ),
+      height: screenHeight * 0.25, // ✅ Responsive height (adjusts with screen)
+      width: double.infinity, // ✅ Takes full width
+      margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02), // Responsive margin
       child: ListView.builder(
         itemCount: images.length, // ✅ Use full list length
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            height: 180,
-            width: 290,
-            margin: EdgeInsets.all(10),
+            width: screenWidth * 0.6, // ✅ Responsive width (adjusts with screen)
+            margin: EdgeInsets.all(screenWidth * 0.02), // Responsive spacing
             decoration: BoxDecoration(
-              
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(screenWidth * 0.03), // Responsive border radius
             ),
             child: Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // ✅ Smooth corners
+                  borderRadius: BorderRadius.circular(screenWidth * 0.03), // Smooth corners
                   child: Image.asset(
-                    images[index], // ✅ Correct way to access images
+                    images[index], 
                     fit: BoxFit.cover,
                     width: double.infinity, 
                     height: double.infinity,

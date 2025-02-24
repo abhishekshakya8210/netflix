@@ -8,8 +8,8 @@ class Live_3 extends StatefulWidget {
 }
 
 class _Live_3State extends State<Live_3> {
-  // ✅ Corrected list structure
-  List<String> images = [
+  // ✅ Image list
+  final List<String> images = [
     'assets/z-1.png',
     'assets/z-2.png',
     'assets/z-3.png',
@@ -30,52 +30,56 @@ class _Live_3State extends State<Live_3> {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ Get screen dimensions using MediaQuery
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      height: 320,
-      width: double.maxFinite,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-      ),
+      height: screenHeight * 0.4, // ✅ Dynamic height based on screen size
+      width: double.infinity, // ✅ Takes full width
+      margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02), // Responsive margin
       child: ListView.builder(
         itemCount: images.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            height: 320,
-            width: 200,
-            margin: EdgeInsets.all(10),
+            width: screenWidth * 0.45, // ✅ Responsive width
+            margin: EdgeInsets.all(screenWidth * 0.02), // Responsive spacing
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(screenWidth * 0.03), // Responsive border radius
             ),
             child: Stack(
               children: [
+                // ✅ Image with rounded corners
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // Smooth corners
+                  borderRadius: BorderRadius.circular(screenWidth * 0.03), // Smooth corners
                   child: AspectRatio(
-                    // Adjust the ratio as needed (example: 3 / 4)
-                    aspectRatio: 3 / 4,
+                    aspectRatio: 3 / 4, // ✅ Keeps a consistent image ratio
                     child: Image.asset(
-                      images[index],
-                      fit: BoxFit.cover, // Image covers the AspectRatio box without distortion
+                      images[index], 
+                      fit: BoxFit.cover, // Covers the entire box without distortion
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
+                // ✅ Small Icon Container (Red Box with King Icon)
+                Positioned(
+                  top: screenHeight * 0.015, // ✅ Responsive position
+                  left: screenWidth * 0.03, // ✅ Responsive position
                   child: Container(
-                    height: 40,
-                    width: 40,
-                 decoration: BoxDecoration(
-                     color: Colors.red,
-                     borderRadius: BorderRadius.circular(7)
-                 ),
-                 child: Stack(
-                  children: [
-                  Center(child: Image(image: AssetImage('assets/king.png')))
-                  ],
-                 ),
+                    height: screenWidth * 0.1, // ✅ Responsive size
+                    width: screenWidth * 0.1, // ✅ Responsive size
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(screenWidth * 0.02), // Responsive radius
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/king.png',
+                        width: screenWidth * 0.07, // ✅ Responsive icon size
+                      ),
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           );

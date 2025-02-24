@@ -11,7 +11,7 @@ class SpalshScreen extends StatefulWidget {
 class _SpalshScreenState extends State<SpalshScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 1),()
+    Future.delayed(Duration(seconds: 3),()
     {
       Navigator.push(context, 
       MaterialPageRoute(builder: (context)=>Intropage()

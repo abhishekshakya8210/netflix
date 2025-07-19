@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix/homepage.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   @override
@@ -12,6 +13,34 @@ class _LoginState extends State<Login> {
     // Get screen size
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    TextEditingController emailcontroller = TextEditingController();
+    TextEditingController passwordcontroller = TextEditingController();
+    void login(String email,String password)async{
+      try{
+            http.Response response = await http.post(
+              Uri.parse('https://reqres.in/api/login'),
+              body:{
+                'email': email,
+                'password': password
+              }
+            );
+            if(response.statusCode == 200){
+              print('login successfully');
+              print('${emailcontroller.text.toString()}');
+              print('${passwordcontroller.text.toString()}');
+              
+
+            }else{
+              print('❌❌❌❌ login failed');
+               print('${emailcontroller.text.toString()}');
+              print('${passwordcontroller.text.toString()}');
+             
+            }
+      }catch(e){
+        print(e.toString());
+      }
+    }
+
 
     return SafeArea(
       child: Scaffold(
@@ -34,6 +63,7 @@ class _LoginState extends State<Login> {
 
                 // Email Input Field
                 TextField(
+                  controller: emailcontroller,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     filled: true,
@@ -50,6 +80,7 @@ class _LoginState extends State<Login> {
 
                 // Password Input Field
                 TextField(
+                  controller: passwordcontroller,
                   style: TextStyle(color: Colors.white),
                   obscureText: true,
                   decoration: InputDecoration(
@@ -77,7 +108,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder:
+                                        Navigator.push(context, MaterialPageRoute(builder:
                    (context)=>Homepage()));
                     },
                     child: Text(

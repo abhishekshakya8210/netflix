@@ -22,7 +22,7 @@ class _LiveSeenState extends State<LiveSeen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: screenHeight * 0.1, // ✅ Dynamic AppBar height
+          toolbarHeight: screenHeight * 0.1, 
           automaticallyImplyLeading: false, 
           centerTitle: true,
           backgroundColor: Colors.grey.shade800,
